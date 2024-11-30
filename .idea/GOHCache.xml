@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="Config">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/config/config.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/cmd/app/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732942159334" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/cmd/migrate/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732863191535" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732862716575" />
+              <option name="schema">
+                <list>
+                  <option value="Config" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/home.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732882002220" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/database/database.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732861997925" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/public/tlwd.css.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732882800631" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/views/home_templ.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732879953742" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/views/layouts/base_templ.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1732881421692" />
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="config" value="Config" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1732869493260" />
+  </component>
+</project>
