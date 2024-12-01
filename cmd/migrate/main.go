@@ -1,32 +1,26 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"log"
 
 	"github.com/asyncnavi/raateo/config"
 	"github.com/asyncnavi/raateo/database"
 )
 
-func init() {
-
-	envPath := config.GetEnvPath()
-
-	cfg, err := config.LoadConfig(envPath)
-
-	if err != nil {
-		log.Fatal("🚀 Could not load environment variables", err)
-	}
-
-	database.InitDB(&cfg)
-}
-
 func main() {
-	database.DB.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"")
-	err := database.DB.AutoMigrate()
+	cfg, err := config.LoadConfig(config.GetEnvPath())
 	if err != nil {
-		log.Fatal("Migrate Failed:", err)
-		return
+		log.Fatal("ERROR : Could not load environment variables.", err)
 	}
-	fmt.Println("Migration Complete")
+
+	ctx := context.TODO()
+
+	db := database.NewDatabase(&cfg)
+
+	if err := db.Migrate(ctx); err != nil {
+		log.Fatal("ERROR : failed to migrate.", err)
+	}
+
+	log.Printf("Migration went succesffully.")
 }

@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/clerk/clerk-sdk-go/v2"
 	"github.com/joho/godotenv"
 )
 
@@ -21,6 +22,8 @@ type Config struct {
 	ClientOrigin string
 
 	Secret string
+
+	ClerkKey string
 }
 
 func LoadConfig(path string) (config Config, err error) {
@@ -42,7 +45,11 @@ func LoadConfig(path string) (config Config, err error) {
 		ServerPort: os.Getenv("SERVER_ADDR"),
 
 		Secret: os.Getenv("SECRET"),
+
+		ClerkKey: os.Getenv("CLERK_KEY"),
 	}
+
+	clerk.SetKey(config.ClerkKey)
 
 	return config, nil
 }

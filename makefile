@@ -1,4 +1,7 @@
 tlwd:
-	tailwind -i ./views/static/tlwd.css -o public/tlwd.css --watch
+	npm run tailwind:watch
 tmplengine:
-	templ generate --watch --proxy=http://localhost:8080
+	templ generate --watch --proxy=http://localhost:3001 
+
+migrate:
+	go build -o ./tmp/migrate ./cmd/migrate && ./tmp/migrate

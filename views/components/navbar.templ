@@ -1,21 +1,37 @@
 package components
 
-templ Navbar() {
-   <header class="body-font">
-          <div class="container mx-auto flex flex-wrap justify-between p-5 flex-col md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-              <span class="ml-3 text-2xl uppercase font-bold ">Raateo</span>
-            </a>
+import (
+	"github.com/asyncnavi/raateo/database"
+	"github.com/asyncnavi/raateo/views/ui"
+)
 
-            <div class="flex gap-4">
-            <button class="font-bold inline-flex items-center bg-blue-500 border-2 border-black py-2 px-3 rounded-full shadow-[4px_4px_black] hover:shadow-none ">
-                               Write a review.
-                        </button>
-                <button class="font-bold inline-flex items-center bg-pink-500 border-2 border-black py-2 px-3 rounded-full shadow-[4px_4px_black] hover:shadow-none ">
-                            Join or Login
-               </button>
-            </div>
-             </div>
+templ UserMenu(name string) {
+	<div class="flex items-center gap-2 bg-[#fff] py-2 px-3 rounded-full  cursor-pointer">
+		<h4 class="font-bold">{ name }</h4>
+		<img class="w-[24px] h-[24px] rounded-full " src="/public/sasuke_.avif"/>
+		<i class="fa-solid fa-chevron-down"></i>
+	</div>
+}
 
-   </header>
+templ Navbar(user *database.User) {
+	<header class="body-font">
+		<div class="container mx-auto flex flex-wrap justify-between p-5 flex-col md:flex-row items-center">
+			<!-- Logo -->
+			<a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+				<span class="ml-3 text-2xl font-bold ">Raateo</span>
+			</a>
+			<div class="flex gap-4 items-center">
+				if user != nil {
+					@ui.URLButton("Create organization", "/organization/create", "white")
+				} else {
+					@ui.URLButton("Create organization", "/login", "white")
+				}
+				if user!=nil {
+					@UserMenu(user.FirstName)
+				} else {
+					@ui.URLButton("Login", "/login", "pink-500")
+				}
+			</div>
+		</div>
+	</header>
 }

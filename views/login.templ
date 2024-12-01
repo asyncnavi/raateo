@@ -1,0 +1,34 @@
+package views
+
+import (
+	"github.com/asyncnavi/raateo/views/components"
+	"github.com/asyncnavi/raateo/views/layouts"
+)
+
+templ Login() {
+	@layouts.Base("Login") {
+		<div>
+			@components.SimpleNavbar()
+			<div class="flex mx-auto w-full justify-center items-center">
+				<div id="login-wrapper"></div>
+			</div>
+		</div>
+	}
+	<script>
+    window.addEventListener('load', async function () {
+        await Clerk.load()
+
+        // const userButtonDiv = document.getElementById('login')
+
+        // Clerk.mountUserButton(userButtonDiv)
+        // } else {
+        // document.getElementById('app').innerHTML = `
+        // <div id="sign-in"></div>
+        // `
+
+        const loginWrapper = document.getElementById('login-wrapper')
+
+        Clerk.mountSignIn(loginWrapper)
+    });
+    </script>
+}
