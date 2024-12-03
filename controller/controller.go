@@ -2,10 +2,13 @@ package controller
 
 import (
 	"context"
-	"net/http"
 
 	"github.com/asyncnavi/raateo/database"
-	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
+)
+
+var (
+	validate *validator.Validate
 )
 
 type contextKey string
@@ -13,6 +16,10 @@ type contextKey string
 const (
 	userContextKey = contextKey("user")
 )
+
+func init() {
+	validate = validator.New()
+}
 
 type Controller struct {
 	db *database.Database
@@ -32,14 +39,4 @@ func UserFromContext(ctx context.Context) *database.User {
 		return nil
 	}
 	return u
-}
-
-func InternalError(c *gin.Context) {
-	c.Status(http.StatusInternalServerError)
-	c.Abort()
-}
-
-func MissingSession(c *gin.Context) {
-	c.Redirect(http.StatusTemporaryRedirect, "/login")
-	c.Abort()
 }

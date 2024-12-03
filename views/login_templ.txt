@@ -1,3 +1,0 @@
-<div>
-<div class=\"flex mx-auto w-full justify-center items-center\"><div id=\"login-wrapper\"></div></div></div>
-<script>\n    window.addEventListener('load', async function () {\n        await Clerk.load()\n\n        // const userButtonDiv = document.getElementById('login')\n\n        // Clerk.mountUserButton(userButtonDiv)\n        // } else {\n        // document.getElementById('app').innerHTML = `\n        // <div id=\"sign-in\"></div>\n        // `\n\n        const loginWrapper = document.getElementById('login-wrapper')\n\n        Clerk.mountSignIn(loginWrapper)\n    });\n    </script>

@@ -25,3 +25,11 @@ func (db *Database) FindOrganization(id int) (*Organization, error) {
 	}
 	return &org, nil
 }
+
+func (db *Database) FindOrganizationByUser(id int) (*Organization, error) {
+	var org Organization
+	if err := db.db.First(&org, "user_id = ?", id).Error; err != nil {
+		return nil, err
+	}
+	return &org, nil
+}
