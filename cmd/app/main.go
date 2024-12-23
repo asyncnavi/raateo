@@ -40,9 +40,12 @@ func setupRoutes(cfg *config.Config) *gin.Engine {
 
 	router := server.Group("").Use(rc.Authorize())
 	{
-		router.GET("/organization/user", rc.GetUserOganization())
-		router.POST("/organization/create", rc.CreateOrganization())
+		router.GET("/organization/me", rc.GetUserOganization())
+		router.GET("/organization/products/:org_id", rc.GetProductList())
+		router.POST("/organization", rc.CreateOrganization())
 	}
-
+	{
+		router.POST("/product", rc.CreateProduct())
+	}
 	return server
 }

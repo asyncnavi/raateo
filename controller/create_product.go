@@ -1,9 +1,13 @@
 package controller
 
 import (
+	"log/slog"
+	"net/http"
+	"strconv"
+
+	"github.com/asyncnavi/raateo/database"
 	apiErrors "github.com/asyncnavi/raateo/pkg/errros"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
 )
 
 func (rc *Controller) CreateProduct() gin.HandlerFunc {
@@ -17,23 +21,41 @@ func (rc *Controller) CreateProduct() gin.HandlerFunc {
 		}
 
 		if err := c.ShouldBindJSON(&input); err != nil {
-			apiErrors.SendInvalidJSONError(c, err)
+			slog.Error("failed to parse json", "", err)
+			apiErrors.RespondWithError(c, err)
 			return
 		}
 
-		if err := validate.Struct(input); err != nil {
-			var validationErrors []string
+		// Parse Organization ID to uint
+		orgID, err := strconv.Atoi(input.OrganizationID)
 
-			for _, err := range err.(validator.ValidationErrors) {
-				validationErrors = append(validationErrors, err.Error())
-			}
-
-			apiErrors.SendValidationError(c, validationErrors)
+		if err != nil {
+			slog.Error("failed to parse organization_id", "", err)
+			apiErrors.RespondWithError(c, err)
+			return
 		}
 
-		ctx := c.Request.Context()
+		prod := &database.Product{
+			OrganizationID: uint(orgID),
+			Name:           input.Name,
+			Description:    input.Description,
+			LogoURL:        input.LogoURL,
+			ThumbnailURL:   input.ThumbnailURL,
+		}
+		if err := rc.db.SaveProduct(prod); err != nil {
+			slog.Error("failed to save product")
+			apiErrors.RespondWithError(c, err)
+			return
+		}
 
-		user := UserFromContext(ctx)
+		resultProduct := gin.H{
+			"organization_id": uint(orgID),
+			"name":            input.Name,
+			"description":     input.Description,
+			"logo_url":        input.LogoURL,
+			"thumbnail_url":   input.ThumbnailURL,
+		}
 
+		c.JSON(http.StatusOK, resultProduct)
 	}
 }

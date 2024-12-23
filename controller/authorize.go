@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"fmt"
 	"log/slog"
 	"net/http"
 
@@ -18,7 +17,6 @@ func (ao *Controller) Authorize() gin.HandlerFunc {
 		ctx := c.Request.Context()
 		cookies := c.Request.Cookies()
 
-		fmt.Printf("Cookies Length :%d", len(cookies))
 		tkn := ""
 		for _, cookie := range cookies {
 			if cookie.Name == "__session" {
@@ -46,7 +44,6 @@ func (ao *Controller) Authorize() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		fmt.Printf("Clerk_ID :%s ", claims.Subject)
 		user, err := ao.db.FindByClerkID(claims.Subject)
 
 		if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {

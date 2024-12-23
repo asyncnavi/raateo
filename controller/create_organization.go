@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/asyncnavi/raateo/database"
+	apiErrors "github.com/asyncnavi/raateo/pkg/errros"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -17,24 +18,7 @@ func (oc *Controller) CreateOrganization() gin.HandlerFunc {
 		}
 
 		if err := c.ShouldBindJSON(&input); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": "Invalid Input Format",
-				"details": "Failed to parse JSON" + err.Error(),
-			})
-			return
-		}
-
-		// TODO : Handle Field Errors properly
-		if err := validate.Struct(input); err != nil {
-			// var validationErrors []string
-			// for _, err := range err.(validator.ValidationErrors) {
-			// 	validationErrors = append(validationErrors, err.Error())
-			// }
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": "Field Error",
-				"details": "Invalid Field:",
-			})
-
+			apiErrors.RespondWithError(c, err)
 			return
 		}
 
@@ -43,10 +27,7 @@ func (oc *Controller) CreateOrganization() gin.HandlerFunc {
 		_, err := oc.db.FindOrganizationByUser(int(user.ID))
 
 		if err != nil && !errors.Is(gorm.ErrRecordNotFound, err) {
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"message": "Internal Server error",
-				"details": err.Error(),
-			})
+			apiErrors.InternalError()
 			return
 		}
 

@@ -15,3 +15,22 @@ type Product struct {
 func (*Product) TableName() string {
 	return "products"
 }
+
+func (db *Database) SaveProduct(prod *Product) error {
+	return db.db.Save(prod).Error
+}
+
+func (db *Database) GetProduct(id uint) (Product, error) {
+	var prod Product
+	result := db.db.Where("id = ?", id).First(&prod)
+	if result.Error != nil {
+		return Product{}, result.Error
+	}
+	return prod, nil
+}
+
+func (db *Database) ListProductsByOrganizationId(id uint) ([]Product, error) {
+	var products []Product
+	result := db.db.Where("organization_id = ?", id).Find(&products)
+	return products, result.Error
+}
