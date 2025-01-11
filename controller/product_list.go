@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (pc *Controller) GetProductList() gin.HandlerFunc {
+func (pc *Controller) ListProduct() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 		// get the id

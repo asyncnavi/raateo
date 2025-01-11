@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (oc *Controller) GetUserOganization() gin.HandlerFunc {
+func (oc *Controller) UserOrganization() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx := c.Request.Context()
 

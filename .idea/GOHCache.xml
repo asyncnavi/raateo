@@ -3,10 +3,80 @@
   <component name="GoORMHelperCache">
     <option name="schemaMapping">
       <map>
+        <entry key="APIError">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/pkg/errros/errors.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AppError">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/pkg/app/errors.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Config">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/config/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Controller">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/controller/controller.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Database">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/database/database.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Feature">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/database/feature.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="FieldError">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/pkg/validate/errors.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Organization">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/database/organization.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Product">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/database/product.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/database/user.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ValidationAPIError">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/pkg/errros/errors.go" />
             </set>
           </value>
         </entry>
@@ -17,21 +87,21 @@
         <entry key="file://$PROJECT_DIR$/cmd/app/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1732942159334" />
+              <option name="lastModified" value="1736531419567" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/cmd/migrate/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1732863191535" />
+              <option name="lastModified" value="1732968900000" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/config/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1732862716575" />
+              <option name="lastModified" value="1733139461339" />
               <option name="schema">
                 <list>
                   <option value="Config" />
@@ -40,10 +110,196 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/controller/authorize.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733286804551" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/controller.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733234539519" />
+              <option name="schema">
+                <list>
+                  <option value="Controller" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/create_organization.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733285803279" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/create_product.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733289057264" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/get_product_list.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1735360414253" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/get_user_organization.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1735408272957" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/organization_me.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1736530986058" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/product.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1736531058682" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/product_list.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1736531058694" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/user_organization.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1736531206451" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/database/database.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1732861997925" />
+              <option name="lastModified" value="1733073443126" />
+              <option name="schema">
+                <list>
+                  <option value="Database" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/database/feature.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733027106000" />
+              <option name="schema">
+                <list>
+                  <option value="Feature" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/database/migrations.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733237969881" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/database/organization.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733150059551" />
+              <option name="schema">
+                <list>
+                  <option value="Organization" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/database/product.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1734764605272" />
+              <option name="schema">
+                <list>
+                  <option value="Product" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/database/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733146713848" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/pkg/app/errors.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1734163844691" />
+              <option name="schema">
+                <list>
+                  <option value="AppError" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/pkg/errros/controller.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733283834090" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/pkg/errros/errors.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733245442967" />
+              <option name="schema">
+                <list>
+                  <option value="APIError" />
+                  <option value="ValidationAPIError" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/pkg/validate/errors.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733242413665" />
+              <option name="schema">
+                <list>
+                  <option value="FieldError" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/pkg/validate/validate.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1733242973337" />
             </ScannedPath>
           </value>
         </entry>
@@ -51,9 +307,19 @@
     </option>
     <option name="tableStructMapping">
       <map>
+        <entry key="api_error" value="APIError" />
+        <entry key="app_error" value="AppError" />
         <entry key="config" value="Config" />
+        <entry key="controller" value="Controller" />
+        <entry key="database" value="Database" />
+        <entry key="feature" value="Feature" />
+        <entry key="field_error" value="FieldError" />
+        <entry key="organization" value="Organization" />
+        <entry key="product" value="Product" />
+        <entry key="user" value="User" />
+        <entry key="validation_api_error" value="ValidationAPIError" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1733668864096" />
+    <option name="lastTimeChecked" value="1736529751821" />
   </component>
 </project>

@@ -16,12 +16,12 @@ func main() {
 		log.Fatal("ERROR : Could not load environment variables.", err)
 	}
 
-	server := setupRoutes(&cfg)
+	server := initRoutes(&cfg)
 
 	log.Fatal(server.Run(":" + cfg.ServerPort))
 }
 
-func setupRoutes(cfg *config.Config) *gin.Engine {
+func initRoutes(cfg *config.Config) *gin.Engine {
 	db := database.NewDatabase(cfg)
 
 	server := gin.Default()
@@ -40,8 +40,8 @@ func setupRoutes(cfg *config.Config) *gin.Engine {
 
 	router := server.Group("").Use(rc.Authorize())
 	{
-		router.GET("/organization/me", rc.GetUserOganization())
-		router.GET("/organization/products/:org_id", rc.GetProductList())
+		router.GET("/organization/me", rc.UserOrganization())
+		router.GET("/organization/products/:org_id", rc.ListProduct())
 		router.POST("/organization", rc.CreateOrganization())
 	}
 	{
