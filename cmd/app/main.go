@@ -46,6 +46,7 @@ func initRoutes(cfg *config.Config) *gin.Engine {
 	}
 	{
 		router.POST("/product", rc.CreateProduct())
+		router.GET("/product/:id", rc.SingleProduct())
 	}
 	return server
 }
