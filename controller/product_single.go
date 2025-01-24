@@ -25,42 +25,39 @@ func (pc *Controller) SingleProduct() gin.HandlerFunc {
 			return
 		}
 
-		product ,err := pc.db.GetProduct(uint(productId))
+		product, err := pc.db.GetProduct(uint(productId))
 
 		if err != nil {
 			if errors.Is(gorm.ErrRecordNotFound, err) {
 				slog.Error("failed to find product with id")
-				c.JSON(http.StatusNotFound,gin.H{
+				c.JSON(http.StatusNotFound, gin.H{
 					"message": "Product not found",
 					"details": "User does have product in the database associated to this id",
 				})
 
 				return
 			} else {
-				slog.Error("Error querying database",err)
-				c.JSON(http.StatusInternalServerError,gin.H{
-					"message" : "Internal Server Error",
-					"details" : "Something went wrong at backend",
+				slog.Error("Error querying database", err)
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"message": "Internal Server Error",
+					"details": "Something went wrong at backend",
 				})
 				return
 			}
 
-
-
 		}
 
-		resultProduct  := map[string]any{
-		"id":              product.ID,
-		"organization_id": product.OrganizationID,
-		"name":            product.Name,
-		"description":     product.Description,
-		"logo_url":        product.LogoURL,
-		"thumbnail_url":   product.ThumbnailURL,
-		"created_at":      product.CreatedAt,
-		"updated_at":      product.UpdatedAt,
-		"deleted_at":      product.DeletedAt,
+		resultProduct := map[string]any{
+			"id":              product.ID,
+			"organization_id": product.OrganizationID,
+			"name":            product.Name,
+			"description":     product.Description,
+			"logo_url":        product.LogoURL,
+			"thumbnail_url":   product.ThumbnailURL,
+			"created_at":      product.CreatedAt,
+			"updated_at":      product.UpdatedAt,
+			"deleted_at":      product.DeletedAt,
 		}
-
 
 		c.JSON(http.StatusOK, resultProduct)
 

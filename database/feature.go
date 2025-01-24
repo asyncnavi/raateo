@@ -17,3 +17,7 @@ type Feature struct {
 func (*Feature) TableName() string {
 	return "features"
 }
+
+func (db *Database) SaveFeature(feature *Feature) error {
+	return db.db.Save(feature).Error
+}

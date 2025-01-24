@@ -20,7 +20,6 @@ func (rc *Controller) CreateProduct() gin.HandlerFunc {
 	}
 	return func(c *gin.Context) {
 
-
 		if err := c.ShouldBindJSON(&reqArgs); err != nil {
 			slog.Error("failed to parse json", "", err)
 			apiErrors.RespondWithError(c, err)
