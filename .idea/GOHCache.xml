@@ -66,6 +66,13 @@
             </set>
           </value>
         </entry>
+        <entry key="Rating">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/database/rating.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="User">
           <value>
             <set>
@@ -87,7 +94,7 @@
         <entry key="file://$PROJECT_DIR$/cmd/app/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1736656041643" />
+              <option name="lastModified" value="1741978108377" />
             </ScannedPath>
           </value>
         </entry>
@@ -101,7 +108,7 @@
         <entry key="file://$PROJECT_DIR$/config/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1733139461339" />
+              <option name="lastModified" value="1738413350854" />
               <option name="schema">
                 <list>
                   <option value="Config" />
@@ -110,17 +117,45 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/config/cors.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741973424517" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/config/storage.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1738435618683" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/auth_checker.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741973819559" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/auth_middleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741978108366" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/controller/authorize.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1733286804551" />
+              <option name="lastModified" value="1738437965308" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/controller.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1733234539519" />
+              <option name="lastModified" value="1741970032379" />
               <option name="schema">
                 <list>
                   <option value="Controller" />
@@ -129,59 +164,136 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/controller/create_feature.go">
+        <entry key="file://$PROJECT_DIR$/controller/create_product.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1737731095770" />
+              <option name="lastModified" value="1741978970216" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/feature_create.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1737737223974" />
+              <option name="lastModified" value="1738409576922" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/feature_list.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741958927497" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/features_by_organizaiton.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741958927491" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/list_product.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741979054924" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/middleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741978004563" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/one_product.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741978820864" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/org_checker.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741970025256" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/organization_create.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1733285803279" />
+              <option name="lastModified" value="1737789772420" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/organization_products.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741977941332" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/product_create.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1736958230517" />
+              <option name="lastModified" value="1737789772389" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/product_delete.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1737731057408" />
+              <option name="lastModified" value="1737789772405" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/product_handler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741979048901" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/product_list.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1736531058694" />
+              <option name="lastModified" value="1741957861687" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/product_single.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1737731984812" />
+              <option name="lastModified" value="1737789772371" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/product_update.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1738424796666" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/products_by_organization.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1741957716230" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/controller/upload_image.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1738435339493" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/controller/user_organization.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1736531206451" />
+              <option name="lastModified" value="1738420609373" />
             </ScannedPath>
           </value>
         </entry>
@@ -200,7 +312,7 @@
         <entry key="file://$PROJECT_DIR$/database/feature.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1737731452790" />
+              <option name="lastModified" value="1741958927481" />
               <option name="schema">
                 <list>
                   <option value="Feature" />
@@ -212,14 +324,14 @@
         <entry key="file://$PROJECT_DIR$/database/migrations.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1733237969881" />
+              <option name="lastModified" value="1738432353373" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/database/organization.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1733150059551" />
+              <option name="lastModified" value="1738429848117" />
               <option name="schema">
                 <list>
                   <option value="Organization" />
@@ -231,10 +343,22 @@
         <entry key="file://$PROJECT_DIR$/database/product.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1736652922240" />
+              <option name="lastModified" value="1741957767046" />
               <option name="schema">
                 <list>
                   <option value="Product" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/database/rating.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1738432300743" />
+              <option name="schema">
+                <list>
+                  <option value="Rating" />
                 </list>
               </option>
             </ScannedPath>
@@ -316,10 +440,11 @@
         <entry key="field_error" value="FieldError" />
         <entry key="organization" value="Organization" />
         <entry key="product" value="Product" />
+        <entry key="rating" value="Rating" />
         <entry key="user" value="User" />
         <entry key="validation_api_error" value="ValidationAPIError" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1737730082565" />
+    <option name="lastTimeChecked" value="1741938784620" />
   </component>
 </project>

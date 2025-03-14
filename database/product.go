@@ -9,6 +9,7 @@ type Product struct {
 	Description    string `gorm:"column:description; type:text"`
 	LogoURL        string `gorm:"column:logo_url;type:text"`
 	ThumbnailURL   string `gorm:"column:thumbnail_url;type:text"`
+	WebsiteURL     string `gorm:"column:website_url;type:text"`
 	Organization   Organization
 }
 
@@ -29,8 +30,15 @@ func (db *Database) GetProduct(id uint) (Product, error) {
 	return prod, nil
 }
 
-func (db *Database) ListProductsByOrganizationId(id uint) ([]Product, error) {
+func (db *Database) GetProductsByOrganization(id uint) ([]Product, error) {
 	var products []Product
 	result := db.db.Where("organization_id = ?", id).Find(&products)
+	return products, result.Error
+}
+
+// GetAllProducts returns all products
+func (db *Database) GetAllProducts() ([]Product, error) {
+	var products []Product
+	result := db.db.Find(&products)
 	return products, result.Error
 }

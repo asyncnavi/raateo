@@ -8,13 +8,13 @@ import (
 	"gorm.io/gorm"
 )
 
-func (oc *Controller) UserOrganization() gin.HandlerFunc {
+func (ctrl *Controller) UserOrganization() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx := c.Request.Context()
 
 		user := UserFromContext(ctx)
 
-		org, err := oc.db.FindOrganizationByUser(int(user.ID))
+		org, err := ctrl.db.FindOrganizationByUser(int(user.ID))
 
 		if err != nil {
 			if errors.Is(gorm.ErrRecordNotFound, err) {
@@ -33,8 +33,8 @@ func (oc *Controller) UserOrganization() gin.HandlerFunc {
 			}
 		}
 		c.JSON(http.StatusOK, gin.H{
-			"organization_id": org.ID,
-			"name":            org.Name,
+			"id":   org.ID,
+			"name": org.Name,
 		})
 	}
 }

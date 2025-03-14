@@ -4,8 +4,9 @@ import "gorm.io/gorm"
 
 type Organization struct {
 	gorm.Model
-	Name   string `gorm:"column:name;type:varchar(255);not null;unique"`
-	UserID uint   `gorm:"column:user_id;not null;index"`
+	Name    string `gorm:"column:name;type:varchar(255);not null;unique"`
+	UserID  uint   `gorm:"column:user_id;not null;index"`
+	LogoURL string `gorm:"column:logo_url;type:text"`
 
 	User User
 }

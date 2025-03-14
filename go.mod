@@ -9,8 +9,12 @@ require (
 )
 
 require (
+	github.com/cloudinary/cloudinary-go/v2 v2.9.1 // indirect
+	github.com/creasty/defaults v1.7.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/google/uuid v1.5.0 // indirect
+	github.com/gorilla/schema v1.4.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
 )
 

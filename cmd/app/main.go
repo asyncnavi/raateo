@@ -1,13 +1,12 @@
 package main
 
 import (
-	"log"
-
 	"github.com/asyncnavi/raateo/config"
 	"github.com/asyncnavi/raateo/controller"
 	"github.com/asyncnavi/raateo/database"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 func main() {
@@ -20,33 +19,41 @@ func main() {
 
 	log.Fatal(server.Run(":" + cfg.ServerPort))
 }
-
 func initRoutes(cfg *config.Config) *gin.Engine {
 	db := database.NewDatabase(cfg)
 
 	server := gin.Default()
 
-	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = []string{"http://localhost:5173", "http://localhost:3000"}
-	corsConfig.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
-	corsConfig.AllowHeaders = []string{"Content-Type", "Authorization"}
-	corsConfig.ExposeHeaders = []string{"Set-Cookie"}
-	corsConfig.AllowCredentials = true
+	corsConfig := config.SetupCors()
+	cld, ctx := config.SetupStorage(cfg.CloudinaryURL)
 
 	server.Use(cors.New(corsConfig))
 	server.Static("/public", "./public")
 
-	rc := controller.NewController(db)
+	rc := controller.New(db, cld, ctx)
 
-	router := server.Group("").Use(rc.Authorize())
+	public := server.Group("")
+	withUser := server.Group("").Use(rc.AuthMiddleware())
+
 	{
-		router.GET("/organization/me", rc.UserOrganization())
-		router.GET("/organization/products/:org_id", rc.ListProduct())
-		router.POST("/organization", rc.CreateOrganization())
+		withUser.POST("/org", rc.CreateOrganization())
+		withUser.GET("/org/me", rc.UserOrganization())
+		withUser.GET("/org/:org_id/products", rc.OrganizationProducts())
+		withUser.POST("/org/products", rc.CreateProduct())
+		withUser.GET("/org/:org_id/features/:product_id", rc.FeaturesByOrganization())
 	}
 	{
-		router.POST("/product", rc.CreateProduct())
-		router.GET("/product/:id", rc.SingleProduct())
+		public.GET("/products/:id", rc.SingleProduct())
+		public.GET("/products/:id/features", rc.ListFeature())
+		public.GET("/products", rc.Products())
+
 	}
+	{
+		withUser.POST("/org/:organization_id/features", rc.CreateFeature())
+	}
+	{
+		withUser.POST("/uploads", rc.UploadImage())
+	}
+
 	return server
 }

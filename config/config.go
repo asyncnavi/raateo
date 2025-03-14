@@ -24,6 +24,8 @@ type Config struct {
 	Secret string
 
 	ClerkKey string
+
+	CloudinaryURL string
 }
 
 func LoadConfig(path string) (config Config, err error) {
@@ -47,6 +49,8 @@ func LoadConfig(path string) (config Config, err error) {
 		Secret: os.Getenv("SECRET"),
 
 		ClerkKey: os.Getenv("CLERK_KEY"),
+
+		CloudinaryURL: os.Getenv("CLOUDINARY_URL"),
 	}
 
 	clerk.SetKey(config.ClerkKey)
