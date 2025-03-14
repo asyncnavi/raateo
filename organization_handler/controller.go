@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	validate *validator.Validate
+	_ *validator.Validate
 )
 
 type contextKey string
@@ -18,7 +18,7 @@ const (
 )
 
 func init() {
-	validate = validator.New()
+	_ = validator.New()
 }
 
 type Controller struct {
@@ -33,10 +33,6 @@ func New(db *database.Database, cdn *cloudinary.Cloudinary, cdnCtx context.Conte
 
 func WithUser(ctx context.Context, user *database.User) context.Context {
 	return context.WithValue(ctx, userContextKey, user)
-}
-
-func WithOrganization(ctx context.Context, org string) context.Context {
-	return context.WithValue(ctx, userContextKey, org)
 }
 
 func UserFromContext(ctx context.Context) *database.User {

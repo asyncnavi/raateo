@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/asyncnavi/raateo/config"
-	"github.com/asyncnavi/raateo/controller"
 	"github.com/asyncnavi/raateo/database"
+	"github.com/asyncnavi/raateo/organization_handler"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -38,14 +38,13 @@ func initRoutes(cfg *config.Config) *gin.Engine {
 	{
 		withUser.POST("/org", rc.CreateOrganization())
 		withUser.GET("/org/me", rc.UserOrganization())
-		withUser.GET("/org/:org_id/products", rc.OrganizationProducts())
+		withUser.GET("/org/:org_id/products", rc.ListOrganizationProducts())
 		withUser.POST("/org/products", rc.CreateProduct())
-		withUser.GET("/org/:org_id/features/:product_id", rc.FeaturesByOrganization())
 	}
 	{
 		public.GET("/products/:id", rc.SingleProduct())
 		public.GET("/products/:id/features", rc.ListFeature())
-		public.GET("/products", rc.Products())
+		public.GET("/products", rc.ListProducts())
 
 	}
 	{
