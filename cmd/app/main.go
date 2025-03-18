@@ -34,7 +34,7 @@ func initRoutes(cfg *config.Config) *gin.Engine {
 
 	public := server.Group("")
 	withUser := server.Group("").Use(rc.AuthMiddleware())
-
+	// Added comment
 	{
 		withUser.POST("/org", rc.CreateOrganization())
 		withUser.GET("/org/me", rc.UserOrganization())
