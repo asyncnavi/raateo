@@ -44,6 +44,7 @@ func initRoutes(cfg *config.Config) *gin.Engine {
 	{
 		public.GET("/products/:id", rc.SingleProduct())
 		public.GET("/products/:id/features", rc.ListFeature())
+		public.GET("/products/:id/features/:feature_id", rc.SingleFeature())
 		public.GET("/products", rc.ListProducts())
 
 	}
