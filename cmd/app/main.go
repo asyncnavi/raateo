@@ -9,6 +9,14 @@ import (
 	"log"
 )
 
+func HealthCheck() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "Ok",
+		})
+	}
+}
+
 func main() {
 	cfg, err := config.LoadConfig(config.GetEnvPath())
 	if err != nil {
@@ -34,7 +42,10 @@ func initRoutes(cfg *config.Config) *gin.Engine {
 
 	public := server.Group("")
 	withUser := server.Group("").Use(rc.AuthMiddleware())
-	// Added comment
+
+	{
+		public.GET("", HealthCheck())
+	}
 	{
 		withUser.POST("/org", rc.CreateOrganization())
 		withUser.GET("/org/me", rc.UserOrganization())

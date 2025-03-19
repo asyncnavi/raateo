@@ -31,6 +31,10 @@ jobs:
           git pull origin main && \
           ls -la && \
           go mod tidy && \
+          rm -f main && \
+          rm -f migrate && \
           go build -o main ./cmd/app/ && \
+          sudo systemctl restart raateo.service && \
+          sudo systemctl restart migrate.service && \
           echo 'Deployment successful!'"
       
