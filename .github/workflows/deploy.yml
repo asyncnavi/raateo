@@ -28,6 +28,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} "
           cd /var/www/raateo && \
+          git reset --hard HEAD && \
           git pull origin main && \
           ls -la && \
           go mod tidy && \
