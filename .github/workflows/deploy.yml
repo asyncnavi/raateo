@@ -21,13 +21,13 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" | base64 --decode > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 159.65.158.183 >> ~/.ssh/known_hosts
+          echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" | base64 --decode > ~/.ssh/id_rsa.pub
+          chmod 600 ~/.ssh/id_rsa.pub
+          ssh-keyscan -H ${{ secrets.DIGITALOCEAN_SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: Deploy to DigitalOcean
         run: |
-          ssh -o StrictHostKeyChecking=no root@159.65.158.183 "cd /var/www/raateo && \
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITALOCEAN_SERVER_IP }} "cd /var/www/raateo && \
           sudo systemctl stop myapp || true && \
           git pull origin main && \
           go mod tidy && \
