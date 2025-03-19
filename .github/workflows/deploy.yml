@@ -26,11 +26,11 @@ jobs:
 
       - name: Deploy to DigitalOcean
         run: |
-          ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} "cd /var/www/raateo && \
-          sudo systemctl stop myapp || true && \
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} "
+          cd /var/www/raateo && \
           git pull origin main && \
+          ls -la && \
           go mod tidy && \
           go build -o main ./cmd/app/ && \
-          sudo systemctl start myapp && \
-          sudo systemctl enable myapp && \
           echo 'Deployment successful!'"
+      
