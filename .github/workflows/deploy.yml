@@ -11,38 +11,27 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.0.0
 
       - name: Setup Golang
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4.0.0
         with:
-          go-version: 1.21
+          go-version: 1.22
 
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" | base64 --decode > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 159.65.158.183 >> ~/.ssh/known_hosts
 
       - name: Deploy to DigitalOcean
         run: |
-          ssh root@159.65.158.183 << 'EOF'
-          cd /var/www/raateo
-          
-          # Stop existing app
-          sudo systemctl stop myapp || true
-          
-          # Pull latest changes
-          git pull origin main
-          
-          # Build the app
-          go mod tidy
-          go build -o main .
-          
-          # Restart the service
-          sudo systemctl start myapp
-          sudo systemctl enable myapp
-          
-          echo "Deployment successful!"
-          EOF
+          ssh -o StrictHostKeyChecking=no root@159.65.158.183 "cd /var/www/raateo && \
+          sudo systemctl stop myapp || true && \
+          git pull origin main && \
+          go mod tidy && \
+          go build -o main . && \
+          sudo systemctl start myapp && \
+          sudo systemctl enable myapp && \
+          echo 'Deployment successful!'"
