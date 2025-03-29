@@ -18,7 +18,7 @@ func main() {
 
 	db := database.NewDatabase(&cfg)
 
-	if err := db.Migrate(ctx); err != nil {
+	if err := database.Migrate(ctx, db); err != nil {
 		log.Fatal("ERROR : failed to migrate.", err)
 	}
 

@@ -3,7 +3,8 @@ package main
 import (
 	"github.com/asyncnavi/raateo/config"
 	"github.com/asyncnavi/raateo/database"
-	"github.com/asyncnavi/raateo/organization_handler"
+	"github.com/asyncnavi/raateo/internal/controller"
+	"github.com/asyncnavi/raateo/internal/repository"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -35,36 +36,43 @@ func initRoutes(cfg *config.Config) *gin.Engine {
 	corsConfig := config.SetupCors()
 	cld, ctx := config.SetupStorage(cfg.CloudinaryURL)
 
+	repo := repository.New(db)
+
 	server.Use(cors.New(corsConfig))
 	server.Static("/public", "./public")
 
-	rc := controller.New(db, cld, ctx)
+	rc := controller.New(db, cld, ctx, repo)
 
+	// router without authentication
 	public := server.Group("")
-	withUser := server.Group("").Use(rc.AuthMiddleware())
+	// router with authentication
+	protected := server.Group("").Use(rc.AuthMiddleware())
 
 	{
 		public.GET("", HealthCheck())
 	}
 	{
-		withUser.POST("/org", rc.CreateOrganization())
-		withUser.GET("/org/me", rc.UserOrganization())
-		withUser.GET("/org/:org_id/products", rc.ListOrganizationProducts())
-		withUser.POST("/org/products", rc.CreateProduct())
+		protected.POST("/org", rc.CreateOrganization())
+		protected.GET("/org/me", rc.GetOrganizationForUser())
+		protected.GET("/org/products", rc.GetProductsForOrganization())
+		protected.POST("/org/products", rc.CreateProductForOrganization())
+		protected.POST("/org/products/features", rc.CreateFeature())
 	}
 	{
-		public.GET("/products/:id", rc.SingleProduct())
-		public.GET("/products/:id/features", rc.ListFeature())
-		public.GET("/products/:id/features/:feature_id", rc.SingleFeature())
-		public.GET("/products", rc.ListProducts())
+		public.GET("/products", rc.GetProducts())
+		public.GET("/products/:product_id/:organization_id", rc.GetProduct())
+		public.GET("/products/:product_id/:organization_id/features", rc.GetFeaturesForProduct())
+		public.GET("/products/:product_id/:organization_id/features/:feature_id", rc.GetFeature())
+		public.GET("/products/:product_id/:organization_id/features/:feature_id/ratings", rc.GetRatings())
 
 	}
 	{
-		withUser.POST("/org/:organization_id/features", rc.CreateFeature())
+		protected.POST("/ratings", rc.CreateRating())
 	}
-	{
-		withUser.POST("/uploads", rc.UploadImage())
-	}
+
+	//{
+	//	protected.POST("/uploads", rc.UploadImage())
+	//}
 
 	return server
 }

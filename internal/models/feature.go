@@ -1,4 +1,4 @@
-package database
+package models
 
 import (
 	"gorm.io/gorm"
@@ -25,23 +25,4 @@ type Feature struct {
 
 func (*Feature) TableName() string {
 	return "features"
-}
-
-func (db *Database) SaveFeature(feature *Feature) error {
-	return db.db.Save(feature).Error
-}
-
-func (db *Database) GetFeaturesByProduct(productID uint) ([]Feature, error) {
-	var features []Feature
-	if err := db.db.Where("product_id = ?", productID).Find(&features).Error; err != nil {
-		return nil, err
-	}
-	return features, nil
-}
-func (db *Database) GetSingleFeature(productID, featureID uint) (*Feature, error) {
-	var feature Feature
-	if err := db.db.Where("id = ? AND product_id = ?", featureID, productID).First(&feature).Error; err != nil {
-		return nil, err
-	}
-	return &feature, nil
 }

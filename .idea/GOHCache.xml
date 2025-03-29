@@ -27,21 +27,56 @@
         <entry key="Controller">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/organization_handler/controller.go" />
+              <option value="file://$PROJECT_DIR$/internal/controller/controller.go" />
             </set>
           </value>
         </entry>
-        <entry key="Database">
+        <entry key="CreateFeatureRequest">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/database/database.go" />
+              <option value="file://$PROJECT_DIR$/internal/dtos/feauture_dto.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateOrganizationRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/organization_dto.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateProductRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/product_dto.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="CreateRatingRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/rating_dto.go" />
             </set>
           </value>
         </entry>
         <entry key="Feature">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/database/feature.go" />
+              <option value="file://$PROJECT_DIR$/internal/models/feature.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="FeatureParams">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/controller/feature.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="FeatureResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/feauture_dto.go" />
             </set>
           </value>
         </entry>
@@ -55,28 +90,63 @@
         <entry key="Organization">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/database/organization.go" />
+              <option value="file://$PROJECT_DIR$/internal/models/organization.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OrganizationResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/organization_dto.go" />
             </set>
           </value>
         </entry>
         <entry key="Product">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/database/product.go" />
+              <option value="file://$PROJECT_DIR$/internal/models/product.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ProductParams">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/controller/product.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ProductResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/product_dto.go" />
             </set>
           </value>
         </entry>
         <entry key="Rating">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/database/rating.go" />
+              <option value="file://$PROJECT_DIR$/internal/models/rating.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RatingResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/rating_dto.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Repository">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/repository/repository.go" />
             </set>
           </value>
         </entry>
         <entry key="User">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/database/user.go" />
+              <option value="file://$PROJECT_DIR$/internal/models/user.go" />
             </set>
           </value>
         </entry>
@@ -94,14 +164,14 @@
         <entry key="file://$PROJECT_DIR$/cmd/app/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1742356757795" />
+              <option name="lastModified" value="1743254533759" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/cmd/migrate/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1732968900000" />
+              <option name="lastModified" value="1743240388543" />
             </ScannedPath>
           </value>
         </entry>
@@ -134,93 +204,28 @@
         <entry key="file://$PROJECT_DIR$/database/database.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1733073443126" />
-              <option name="schema">
-                <list>
-                  <option value="Database" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/database/feature.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1742011118259" />
-              <option name="schema">
-                <list>
-                  <option value="Feature" />
-                </list>
-              </option>
+              <option name="lastModified" value="1743235969504" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/database/migrations.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1738432353373" />
+              <option name="lastModified" value="1743257613092" />
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/database/organization.go">
+        <entry key="file://$PROJECT_DIR$/internal/controller/auth_middleware.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1738429848117" />
-              <option name="schema">
-                <list>
-                  <option value="Organization" />
-                </list>
-              </option>
+              <option name="lastModified" value="1743230364828" />
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/database/product.go">
+        <entry key="file://$PROJECT_DIR$/internal/controller/controller.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1741957767046" />
-              <option name="schema">
-                <list>
-                  <option value="Product" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/database/rating.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1738432300743" />
-              <option name="schema">
-                <list>
-                  <option value="Rating" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/database/user.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1733146713848" />
-              <option name="schema">
-                <list>
-                  <option value="User" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/organization_handler/auth_middleware.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1741978108366" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/organization_handler/controller.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1741980442914" />
+              <option name="lastModified" value="1743236009392" />
               <option name="schema">
                 <list>
                   <option value="Controller" />
@@ -229,31 +234,214 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/organization_handler/feature_handler.go">
+        <entry key="file://$PROJECT_DIR$/internal/controller/feature.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1742011459431" />
+              <option name="lastModified" value="1743238297880" />
+              <option name="schema">
+                <list>
+                  <option value="FeatureParams" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/organization_handler/organization_handler.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1741979506124" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/organization_handler/product_handler.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1741979870863" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/organization_handler/upload_handler.go">
+        <entry key="file://$PROJECT_DIR$/internal/controller/media.go">
           <value>
             <ScannedPath>
               <option name="lastModified" value="1738435339493" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/controller/organization.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743236211944" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/controller/product.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743236228342" />
+              <option name="schema">
+                <list>
+                  <option value="ProductParams" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/controller/rating.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743255712510" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/dtos/feauture_dto.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743244507565" />
+              <option name="schema">
+                <list>
+                  <option value="CreateFeatureRequest" />
+                  <option value="FeatureResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/dtos/organization_dto.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743246346088" />
+              <option name="schema">
+                <list>
+                  <option value="CreateOrganizationRequest" />
+                  <option value="OrganizationResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/dtos/product_dto.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743246131675" />
+              <option name="schema">
+                <list>
+                  <option value="CreateProductRequest" />
+                  <option value="ProductResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/dtos/rating_dto.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743266904205" />
+              <option name="schema">
+                <list>
+                  <option value="RatingResponse" />
+                  <option value="CreateRatingRequest" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/models/feature.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743234503505" />
+              <option name="schema">
+                <list>
+                  <option value="Feature" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/models/models.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743163358726" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/models/organization.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743223476798" />
+              <option name="schema">
+                <list>
+                  <option value="Organization" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/models/product.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743164085145" />
+              <option name="schema">
+                <list>
+                  <option value="Product" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/models/rating.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743267358304" />
+              <option name="schema">
+                <list>
+                  <option value="Rating" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/models/user.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743163987479" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/repository/feature_repo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743236483771" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/repository/organization_repo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743233691841" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/repository/product_repo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743233650985" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/repository/rating.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743255609284" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/repository/repository.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743235644251" />
+              <option name="schema">
+                <list>
+                  <option value="Repository" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/repository/user_repo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743268264332" />
             </ScannedPath>
           </value>
         </entry>
@@ -289,6 +477,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/pkg/utils/utils.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743225788107" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/pkg/validate/errors.go">
           <value>
             <ScannedPath>
@@ -316,16 +511,26 @@
         <entry key="app_error" value="AppError" />
         <entry key="config" value="Config" />
         <entry key="controller" value="Controller" />
-        <entry key="database" value="Database" />
+        <entry key="create_feature_request" value="CreateFeatureRequest" />
+        <entry key="create_organization_request" value="CreateOrganizationRequest" />
+        <entry key="create_product_request" value="CreateProductRequest" />
+        <entry key="create_rating_request" value="CreateRatingRequest" />
         <entry key="feature" value="Feature" />
+        <entry key="feature_params" value="FeatureParams" />
+        <entry key="feature_response" value="FeatureResponse" />
         <entry key="field_error" value="FieldError" />
         <entry key="organization" value="Organization" />
+        <entry key="organization_response" value="OrganizationResponse" />
         <entry key="product" value="Product" />
+        <entry key="product_params" value="ProductParams" />
+        <entry key="product_response" value="ProductResponse" />
         <entry key="rating" value="Rating" />
+        <entry key="rating_response" value="RatingResponse" />
+        <entry key="repository" value="Repository" />
         <entry key="user" value="User" />
         <entry key="validation_api_error" value="ValidationAPIError" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1742315531525" />
+    <option name="lastTimeChecked" value="1743253726025" />
   </component>
 </project>

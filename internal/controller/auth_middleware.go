@@ -3,10 +3,10 @@ package controller
 import (
 	"errors"
 	"fmt"
+	"github.com/asyncnavi/raateo/internal/models"
 	"log/slog"
 	"net/http"
 
-	"github.com/asyncnavi/raateo/database"
 	"github.com/clerk/clerk-sdk-go/v2/jwt"
 	clerkusersdk "github.com/clerk/clerk-sdk-go/v2/user"
 	"github.com/gin-gonic/gin"
@@ -44,7 +44,7 @@ func (ctrl *Controller) AuthMiddleware() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		user, err := ctrl.db.FindByClerkID(claims.Subject)
+		user, err := ctrl.repo.FindByClerkID(claims.Subject)
 
 		if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 			clerkUser, err := clerkusersdk.Get(ctx, claims.Subject)
@@ -73,14 +73,14 @@ func (ctrl *Controller) AuthMiddleware() gin.HandlerFunc {
 				lastName = *clerkUser.LastName
 			}
 
-			user = &database.User{
+			user = &models.User{
 				FirstName: firstName,
 				LastName:  lastName,
 				Email:     email,
 				ClerkID:   clerkUser.ID,
 			}
 
-			if err := ctrl.db.SaveUser(user); err != nil {
+			if err := ctrl.repo.SaveUser(user); err != nil {
 				slog.Error("Failed to save user in database", "error", err)
 				c.JSON(http.StatusInternalServerError, gin.H{
 					"message": "Internal Server Error",

@@ -9,11 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Database struct {
-	db *gorm.DB
-}
-
-func NewDatabase(cfg *config.Config) *Database {
+func NewDatabase(cfg *config.Config) *gorm.DB {
 	var err error
 	slog.Info("Trying connecting to the Database")
 
@@ -26,5 +22,5 @@ func NewDatabase(cfg *config.Config) *Database {
 	}
 
 	slog.Info("🚀 Connected Successfully to the Databases")
-	return &Database{db: db}
+	return db
 }
