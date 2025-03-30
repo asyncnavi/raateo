@@ -60,45 +60,7 @@ func Migrations(ctx context.Context) []*gormigrate.Migration {
 				return tx.Migrator().DropTable((&models.Feature{}).TableName())
 			},
 		},
-		{
-			ID: "00005-AddProductFields",
-			Migrate: func(tx *gorm.DB) error {
-				if !tx.Migrator().HasColumn(&models.Product{}, "Description") {
-					if err := tx.Migrator().AddColumn(&models.Product{}, "Description"); err != nil {
-						return err
-					}
-				}
-				if !tx.Migrator().HasColumn(&models.Product{}, "LogoURL") {
-					if err := tx.Migrator().AddColumn(&models.Product{}, "LogoURL"); err != nil {
-						return err
-					}
-				}
-				if !tx.Migrator().HasColumn(&models.Product{}, "ThumbnailURL") {
-					if err := tx.Migrator().AddColumn(&models.Product{}, "ThumbnailURL"); err != nil {
-						return err
-					}
-				}
-				return nil
-			},
-			Rollback: func(tx *gorm.DB) error {
-				if tx.Migrator().HasColumn(&models.Product{}, "Description") {
-					if err := tx.Migrator().DropColumn(&models.Product{}, "Description"); err != nil {
-						return err
-					}
-				}
-				if tx.Migrator().HasColumn(&models.Product{}, "LogoURL") {
-					if err := tx.Migrator().DropColumn(&models.Product{}, "LogoURL"); err != nil {
-						return err
-					}
-				}
-				if tx.Migrator().HasColumn(&models.Product{}, "ThumbnailURL") {
-					if err := tx.Migrator().DropColumn(&models.Product{}, "ThumbnailURL"); err != nil {
-						return err
-					}
-				}
-				return nil
-			},
-		},
+
 		{
 			ID: "00005-AddProductFields",
 			Migrate: func(tx *gorm.DB) error {
