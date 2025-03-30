@@ -29,3 +29,13 @@ func GenerateOrganizationResponse(organization *models.Organization) *Organizati
 		UpdatedAt:   organization.UpdatedAt.String(),
 	}
 }
+
+func GenerateCreateOrganizationDTO(o *CreateOrganizationRequest, userID uint) *models.Organization {
+
+	return &models.Organization{
+		Name:        o.Name,
+		Description: o.Description,
+		LogoURL:     o.LogoURL,
+		UserID:      userID,
+	}
+}

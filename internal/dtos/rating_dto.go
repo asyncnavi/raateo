@@ -47,9 +47,32 @@ func GenerateRatingResponse(rating *models.Rating) RatingResponse {
 	}
 }
 
+type RatingDetailForProduct struct {
+	TotalRating   int `json:"total_rating"`
+	AverageRating int `json:"average_rating"`
+}
+
+func GenerateRatingDetailForProduct(ratings []models.Rating) RatingDetailForProduct {
+	var response RatingDetailForProduct
+
+	totalRating := len(ratings)
+	averageRating := 0
+	if totalRating > 0 {
+		sumRating := 0
+		for _, rating := range ratings {
+			sumRating += int(rating.RatingValue)
+		}
+		averageRating = sumRating / totalRating
+	}
+
+	response.TotalRating = totalRating
+	response.AverageRating = averageRating
+	return response
+}
 func GenerateRatingsResponse(ratings []models.Rating) []RatingResponse {
 
 	var response []RatingResponse
+
 	for _, rating := range ratings {
 		response = append(response, RatingResponse{
 			ID:             rating.ID,

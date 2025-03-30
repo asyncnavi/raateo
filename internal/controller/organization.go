@@ -2,12 +2,13 @@ package controller
 
 import (
 	"errors"
+	"log/slog"
+	"net/http"
+
 	"github.com/asyncnavi/raateo/internal/dtos"
-	"github.com/asyncnavi/raateo/internal/models"
 	apiErrors "github.com/asyncnavi/raateo/pkg/errros"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"net/http"
 )
 
 func (ctrl *Controller) CreateOrganization() gin.HandlerFunc {
@@ -31,11 +32,7 @@ func (ctrl *Controller) CreateOrganization() gin.HandlerFunc {
 			return
 		}
 
-		org := &models.Organization{
-			Name:        reqInput.Name,
-			UserID:      user.ID,
-			Description: reqInput.Description,
-		}
+		org := dtos.GenerateCreateOrganizationDTO(&reqInput, user.ID)
 
 		if err := ctrl.repo.SaveOrganization(org); err != nil {
 			apiErrors.InternalError()
@@ -55,12 +52,12 @@ func (ctrl *Controller) GetOrganizationForUser() gin.HandlerFunc {
 		user := UserFromContext(ctx)
 
 		org, err := ctrl.repo.OrganizationFromUser(user.ID)
-
 		if err != nil {
-			if errors.Is(gorm.ErrRecordNotFound, err) {
+			if errors.Is(err, gorm.ErrRecordNotFound) {
 				apiErrors.RespondWithError(c, errors.New("user does not have any organization in the database"))
 				return
 			} else {
+				slog.Error("Returing internal server error..")
 				apiErrors.InternalError()
 				return
 			}

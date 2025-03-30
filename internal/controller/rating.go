@@ -65,3 +65,27 @@ func (ctrl *Controller) GetRatings() gin.HandlerFunc {
 	}
 
 }
+
+func (ctrl *Controller) GetRatingDetailForProduct() gin.HandlerFunc {
+
+	var params struct {
+		ProductID      uint `uri:"product_id" binding:"required"`
+		OrganizationID uint `uri:"organization_id" binding:"required"`
+	}
+
+	return func(c *gin.Context) {
+		if err := c.ShouldBindUri(&params); err != nil {
+			apiErrors.RespondWithError(c, errors.New("invalid params"))
+		}
+
+		ratings, err := ctrl.repo.GetRatingsByProduct(params.OrganizationID, params.ProductID)
+
+		if err != nil {
+			apiErrors.RespondWithError(c, errors.New("could Not fetch ratings"))
+		}
+		result := dtos.GenerateRatingDetailForProduct(ratings)
+
+		c.JSON(http.StatusOK, result)
+
+	}
+}

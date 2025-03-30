@@ -129,6 +129,13 @@
             </set>
           </value>
         </entry>
+        <entry key="RatingDetailForProduct">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/internal/dtos/rating_dto.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="RatingResponse">
           <value>
             <set>
@@ -164,7 +171,7 @@
         <entry key="file://$PROJECT_DIR$/cmd/app/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743254533759" />
+              <option name="lastModified" value="1743322677665" />
             </ScannedPath>
           </value>
         </entry>
@@ -218,7 +225,7 @@
         <entry key="file://$PROJECT_DIR$/internal/controller/auth_middleware.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743230364828" />
+              <option name="lastModified" value="1743328534199" />
             </ScannedPath>
           </value>
         </entry>
@@ -256,14 +263,14 @@
         <entry key="file://$PROJECT_DIR$/internal/controller/organization.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743236211944" />
+              <option name="lastModified" value="1743329276544" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/internal/controller/product.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743236228342" />
+              <option name="lastModified" value="1743318656217" />
               <option name="schema">
                 <list>
                   <option value="ProductParams" />
@@ -275,7 +282,7 @@
         <entry key="file://$PROJECT_DIR$/internal/controller/rating.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743255712510" />
+              <option name="lastModified" value="1743315774222" />
             </ScannedPath>
           </value>
         </entry>
@@ -321,11 +328,12 @@
         <entry key="file://$PROJECT_DIR$/internal/dtos/rating_dto.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743266904205" />
+              <option name="lastModified" value="1743315741005" />
               <option name="schema">
                 <list>
                   <option value="RatingResponse" />
                   <option value="CreateRatingRequest" />
+                  <option value="RatingDetailForProduct" />
                 </list>
               </option>
             </ScannedPath>
@@ -408,21 +416,28 @@
         <entry key="file://$PROJECT_DIR$/internal/repository/organization_repo.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743233691841" />
+              <option name="lastModified" value="1743329297068" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/internal/repository/product_repo.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743233650985" />
+              <option name="lastModified" value="1743321433861" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/internal/repository/rating.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743255609284" />
+              <option name="lastModified" value="1743304293705" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/internal/repository/rating_repo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1743315340802" />
             </ScannedPath>
           </value>
         </entry>
@@ -441,7 +456,7 @@
         <entry key="file://$PROJECT_DIR$/internal/repository/user_repo.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1743268264332" />
+              <option name="lastModified" value="1743328337112" />
             </ScannedPath>
           </value>
         </entry>
@@ -525,6 +540,7 @@
         <entry key="product_params" value="ProductParams" />
         <entry key="product_response" value="ProductResponse" />
         <entry key="rating" value="Rating" />
+        <entry key="rating_detail_for_product" value="RatingDetailForProduct" />
         <entry key="rating_response" value="RatingResponse" />
         <entry key="repository" value="Repository" />
         <entry key="user" value="User" />

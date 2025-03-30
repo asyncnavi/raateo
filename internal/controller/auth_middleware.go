@@ -2,10 +2,10 @@ package controller
 
 import (
 	"errors"
-	"fmt"
-	"github.com/asyncnavi/raateo/internal/models"
 	"log/slog"
 	"net/http"
+
+	"github.com/asyncnavi/raateo/internal/models"
 
 	"github.com/clerk/clerk-sdk-go/v2/jwt"
 	clerkusersdk "github.com/clerk/clerk-sdk-go/v2/user"
@@ -16,93 +16,116 @@ import (
 func (ctrl *Controller) AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx := c.Request.Context()
-		cookies := c.Request.Cookies()
+
+		// Extract the session token from cookies
 		tkn := ""
-		for _, cookie := range cookies {
+		for _, cookie := range c.Request.Cookies() {
 			if cookie.Name == "__session" {
 				tkn = cookie.Value
+				break
 			}
 		}
-		fmt.Print(tkn)
+
+		// If no token is found, return an unauthorized response
 		if tkn == "" {
 			c.JSON(http.StatusUnauthorized, gin.H{
-				"message": "User is not logged",
-				"details": "Cookie not found",
+				"message": "User is not logged in",
+				"details": "Session cookie not found",
 			})
 			c.Abort()
 			return
 		}
 
+		// Verify the JWT token
 		claims, err := jwt.Verify(ctx, &jwt.VerifyParams{
 			Token: tkn,
 		})
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"message": "Internal Server Error",
-				"details": "Failed to parse authentication token",
+			slog.Error("Failed to verify JWT token", "error", err)
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"message": "Invalid authentication token",
+				"details": "Failed to parse or verify token",
 			})
 			c.Abort()
 			return
 		}
+
 		user, err := ctrl.repo.FindByClerkID(claims.Subject)
 
-		if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
-			clerkUser, err := clerkusersdk.Get(ctx, claims.Subject)
-			if err != nil {
-				c.JSON(http.StatusInternalServerError, gin.H{
-					"message": "User is not register",
-					"details": "Unable to find user in clerk database",
-				})
-				c.Abort()
-			}
+		if err != nil {
+			slog.Error("Error while finding the user.")
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				slog.Error("User does not exist in our database base ")
+				slog.Info("Fetching user from clerk...")
 
-			var (
-				email     string
-				firstName string
-				lastName  string
-			)
-			for _, addr := range clerkUser.EmailAddresses {
-				if addr.ID == *clerkUser.PrimaryEmailAddressID {
-					email = addr.EmailAddress
+				// If the user is not found, fetch details from Clerk
+				clerkUser, err := clerkusersdk.Get(ctx, claims.Subject)
+				if err != nil {
+					slog.Error("Failed to fetch user from Clerk", "error", err)
+					c.JSON(http.StatusInternalServerError, gin.H{
+						"message": "Internal Server Error",
+						"details": "Unable to fetch user details from Clerk",
+					})
+					c.Abort()
+					return
 				}
-			}
-			if clerkUser.FirstName != nil {
-				firstName = *clerkUser.FirstName
-			}
-			if clerkUser.LastName != nil {
-				lastName = *clerkUser.LastName
-			}
 
-			user = &models.User{
-				FirstName: firstName,
-				LastName:  lastName,
-				Email:     email,
-				ClerkID:   clerkUser.ID,
-			}
+				slog.Info("User fetched from clerk...")
 
-			if err := ctrl.repo.SaveUser(user); err != nil {
-				slog.Error("Failed to save user in database", "error", err)
+				slog.Info("Trying saving user...")
+
+				// Extract user details from Clerk
+				var email, firstName, lastName string
+				for _, addr := range clerkUser.EmailAddresses {
+					if clerkUser.PrimaryEmailAddressID != nil && addr.ID == *clerkUser.PrimaryEmailAddressID {
+						email = addr.EmailAddress
+						break
+					}
+				}
+				if clerkUser.FirstName != nil {
+					firstName = *clerkUser.FirstName
+				}
+				if clerkUser.LastName != nil {
+					lastName = *clerkUser.LastName
+				}
+
+				// Create a new user record
+				user = &models.User{
+					FirstName: firstName,
+					LastName:  lastName,
+					Email:     email,
+					ClerkID:   clerkUser.ID,
+				}
+
+				// Save the user to the database
+				if err := ctrl.repo.SaveUser(user); err != nil {
+					slog.Error("Failed to save user in database", "error", err)
+					c.JSON(http.StatusInternalServerError, gin.H{
+						"message": "Internal Server Error",
+						"details": "Failed to save user in database",
+					})
+					c.Abort()
+					return
+				}
+
+				slog.Info("User saved")
+			} else {
+				// Handle other database errors
+				slog.Error("Failed to find user in database", "error", err)
 				c.JSON(http.StatusInternalServerError, gin.H{
 					"message": "Internal Server Error",
-					"details": "Failed to save user in database",
+					"details": "Error finding user in database",
 				})
 				c.Abort()
 				return
 			}
 		}
 
-		if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
-			slog.Error("Failed to find user", "error", err)
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"message": "Internal Server Error",
-				"details": "Error finding user in database" + " " + err.Error(),
-			})
-			c.Abort()
-		}
-
+		// Attach the user to the context
 		ctx = WithUser(ctx, user)
 		c.Request = c.Request.WithContext(ctx)
 
+		// Proceed to the next middleware or handler
 		c.Next()
 	}
 }

@@ -1,31 +1,43 @@
 package repository
 
-import "github.com/asyncnavi/raateo/internal/models"
+import (
+	"errors"
+	"github.com/asyncnavi/raateo/internal/models"
+	"gorm.io/gorm"
+)
 
 func (repo *Repository) SaveOrganization(org *models.Organization) error {
 	return repo.db.Save(org).Error
 }
-
 func (repo *Repository) GetOrganizationFromId(id uint) (*models.Organization, error) {
 	var org models.Organization
-	if err := repo.db.First(&org, "id = ?", id).Error; err != nil {
-		return nil, err
+	result := repo.db.First(&org, "id = ?", id)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, gorm.ErrRecordNotFound
+		}
+		return nil, result.Error
 	}
+
 	return &org, nil
 }
-
 func (repo *Repository) GetProductsFromOrganizationId(id uint) ([]models.Product, error) {
 	var products []models.Product
-	if err := repo.db.Find(&products, "organization_id = ?", id).Error; err != nil {
-		return nil, err
+	result := repo.db.Find(&products, "organization_id = ?", id)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return []models.Product{}, nil
+		}
+		return nil, result.Error
 	}
+
 	return products, nil
 }
-
 func (repo *Repository) OrganizationFromUser(id uint) (*models.Organization, error) {
 	var org models.Organization
-	if err := repo.db.First(&org, "user_id = ?", id).Error; err != nil {
-		return nil, err
-	}
-	return &org, nil
+	result := repo.db.First(&org, "user_id = ?", id)
+
+	return &org, result.Error
 }

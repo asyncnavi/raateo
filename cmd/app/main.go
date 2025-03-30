@@ -1,13 +1,14 @@
 package main
 
 import (
+	"log"
+
 	"github.com/asyncnavi/raateo/config"
 	"github.com/asyncnavi/raateo/database"
 	"github.com/asyncnavi/raateo/internal/controller"
 	"github.com/asyncnavi/raateo/internal/repository"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 func HealthCheck() gin.HandlerFunc {
@@ -55,24 +56,28 @@ func initRoutes(cfg *config.Config) *gin.Engine {
 		protected.POST("/org", rc.CreateOrganization())
 		protected.GET("/org/me", rc.GetOrganizationForUser())
 		protected.GET("/org/products", rc.GetProductsForOrganization())
+		protected.DELETE("/org/products/:product_id", rc.DeleteProductForOrganization())
 		protected.POST("/org/products", rc.CreateProductForOrganization())
-		protected.POST("/org/products/features", rc.CreateFeature())
 	}
 	{
+
 		public.GET("/products", rc.GetProducts())
+		public.GET("/products/search", rc.SearchProduct())
 		public.GET("/products/:product_id/:organization_id", rc.GetProduct())
 		public.GET("/products/:product_id/:organization_id/features", rc.GetFeaturesForProduct())
 		public.GET("/products/:product_id/:organization_id/features/:feature_id", rc.GetFeature())
 		public.GET("/products/:product_id/:organization_id/features/:feature_id/ratings", rc.GetRatings())
+		public.GET("/product/:product_id/:organization_id", rc.GetRatingDetailForProduct())
 
 	}
 	{
 		protected.POST("/ratings", rc.CreateRating())
-	}
+		protected.POST("/features", rc.CreateFeature())
 
-	//{
-	//	protected.POST("/uploads", rc.UploadImage())
-	//}
+	}
+	{
+		protected.POST("/uploads", rc.UploadImage())
+	}
 
 	return server
 }

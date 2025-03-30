@@ -114,125 +114,58 @@ func (ctrl *Controller) CreateProductForOrganization() gin.HandlerFunc {
 	}
 }
 
-//func (ctrl *Controller) CreateProduct() gin.HandlerFunc {
-//	var reqArgs struct {
-//		OrganizationID string `json:"organization_id" validate:"required"`
-//		Name           string `json:"name" validate:"required, min=2, max=256"`
-//		Description    string `json:"description" validate:"max=2000"`
-//		LogoURL        string `json:"logo_url"`
-//		ThumbnailURL   string `json:"thumbnail_url" `
-//	}
-//	return func(c *gin.Context) {
-//
-//		if err := c.ShouldBindJSON(&reqArgs); err != nil {
-//			slog.Error("failed to parse json", "", err)
-//			apiErrors.RespondWithError(c, err)
-//			return
-//		}
-//
-//		// Parse Organization ID to uint
-//		orgID, err := strconv.Atoi(reqArgs.OrganizationID)
-//
-//		if err != nil {
-//			slog.Error("failed to parse organization_id", "", err)
-//			apiErrors.RespondWithError(c, err)
-//			return
-//		}
-//
-//		prod := &database.Product{
-//			OrganizationID: uint(orgID),
-//			Name:           reqArgs.Name,
-//			Description:    reqArgs.Description,
-//			LogoURL:        reqArgs.LogoURL,
-//			ThumbnailURL:   reqArgs.ThumbnailURL,
-//		}
-//		if err := ctrl.db.SaveProduct(prod); err != nil {
-//			slog.Error("failed to save product")
-//			apiErrors.RespondWithError(c, err)
-//			return
-//		}
-//
-//		resultProduct := gin.H{
-//			"organization_id": uint(orgID),
-//			"name":            reqArgs.Name,
-//			"description":     reqArgs.Description,
-//			"logo_url":        reqArgs.LogoURL,
-//			"thumbnail_url":   reqArgs.ThumbnailURL,
-//		}
-//
-//		c.JSON(http.StatusOK, resultProduct)
-//	}
-//}
-//
-//func (ctrl *Controller) ListProducts() gin.HandlerFunc {
-//
-//	return func(c *gin.Context) {
-//		products, err := ctrl.db.GetAllProducts()
-//		if err != nil {
-//			slog.Error("failed to fetch products")
-//			apiErrors.RespondWithError(c, err)
-//			return
-//		}
-//
-//		var resultProducts []map[string]interface{}
-//
-//		for _, product := range products {
-//			resultProducts = append(resultProducts, map[string]interface{}{
-//				"id":              product.ID,
-//				"organization_id": product.OrganizationID,
-//				"name":            product.Name,
-//				"description":     product.Description,
-//				"logo_url":        product.LogoURL,
-//				"thumbnail_url":   product.ThumbnailURL,
-//				"created_at":      product.CreatedAt,
-//				"updated_at":      product.UpdatedAt,
-//				"deleted_at":      product.DeletedAt,
-//			})
-//		}
-//
-//		c.JSON(http.StatusOK, resultProducts)
-//	}
-//}
-//
-//func (ctrl *Controller) ListOrganizationProducts() gin.HandlerFunc {
-//
-//	return func(c *gin.Context) {
-//		// get the id
-//		id := c.Param("org_id")
-//
-//		// parsing product id
-//		orgId, err := strconv.Atoi(id)
-//
-//		if err != nil {
-//			slog.Error("failed to parse organization Id")
-//			apiErrors.RespondWithError(c, err)
-//			return
-//		}
-//
-//		products, err := ctrl.db.GetProductsByOrganization(uint(orgId))
-//
-//		if err != nil {
-//			slog.Error("failed to fetch products")
-//			apiErrors.RespondWithError(c, err)
-//			return
-//		}
-//
-//		var resultProducts []map[string]interface{}
-//
-//		for _, product := range products {
-//			resultProducts = append(resultProducts, map[string]interface{}{
-//				"id":              product.ID,
-//				"organization_id": product.OrganizationID,
-//				"name":            product.Name,
-//				"description":     product.Description,
-//				"logo_url":        product.LogoURL,
-//				"thumbnail_url":   product.ThumbnailURL,
-//				"created_at":      product.CreatedAt,
-//				"updated_at":      product.UpdatedAt,
-//				"deleted_at":      product.DeletedAt,
-//			})
-//		}
-//
-//		c.JSON(http.StatusOK, resultProducts)
-//	}
-//}
+func (ctrl *Controller) DeleteProductForOrganization() gin.HandlerFunc {
+
+	var params struct {
+		ProductID uint `uri:"product_id" binding:"required"`
+	}
+	return func(c *gin.Context) {
+		ctx := c.Request.Context()
+
+		if err := c.ShouldBindUri(&params); err != nil {
+			apiErrors.RespondWithError(c, err)
+			return
+		}
+
+		user := UserFromContext(ctx)
+		org, err := ctrl.repo.OrganizationFromUser(user.ID)
+
+		if err != nil {
+			apiErrors.RespondWithError(c, errors.New("failed to parse organization id"))
+			return
+		}
+
+		if err := ctrl.repo.DeleteProduct(params.ProductID, org.ID); err != nil {
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				apiErrors.RespondWithError(c, errors.New("product not found"))
+				return
+			}
+			apiErrors.InternalError()
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Product deleted successfully",
+		})
+	}
+}
+
+func (ctrl *Controller) SearchProduct() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		query := c.Query("q")
+		if query == "" {
+			apiErrors.RespondWithError(c, errors.New("query parameter is required"))
+			return
+		}
+
+		products, err := ctrl.repo.GetProductWithQuery(query)
+		if err != nil {
+			slog.Error("failed to search products", slog.Any("query", query), slog.Any("error", err))
+			apiErrors.RespondWithError(c, err)
+			return
+		}
+
+		result := dtos.GenerateProductsResponse(products)
+		c.JSON(http.StatusOK, result)
+	}
+}
