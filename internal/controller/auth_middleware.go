@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log/slog"
 	"net/http"
+	"strings"
 
 	"github.com/asyncnavi/raateo/internal/models"
 
@@ -17,24 +18,22 @@ func (ctrl *Controller) AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx := c.Request.Context()
 
-		// Extract the session token from cookies
-		tkn := ""
-		for _, cookie := range c.Request.Cookies() {
-			if cookie.Name == "__session" {
-				tkn = cookie.Value
-				break
-			}
-		}
-
-		// If no token is found, return an unauthorized response
-		if tkn == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{
-				"message": "User is not logged in",
-				"details": "Session cookie not found",
-			})
+		authHeader := c.GetHeader("Authorization")
+		if authHeader == "" {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Authorization header missing"})
 			c.Abort()
 			return
 		}
+
+		// Ensure the header contains "Bearer <token>"
+		tokenParts := strings.Split(authHeader, " ")
+		if len(tokenParts) != 2 || tokenParts[0] != "Bearer" {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid authorization header format"})
+			c.Abort()
+			return
+		}
+
+		tkn := tokenParts[1]
 
 		// Verify the JWT token
 		claims, err := jwt.Verify(ctx, &jwt.VerifyParams{
